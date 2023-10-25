@@ -14,6 +14,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.laba11.Room.App;
+import com.example.laba11.Room.RoomDB;
+import com.example.laba11.Room.Users.UsersDao;
+import com.example.laba11.Room.Users.UsersEntity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -30,60 +34,39 @@ public class MainActivity extends AppCompatActivity {
     List<String> emailsArray = new ArrayList<>();
     List<String> passwordsArray = new ArrayList<>();
 
+    List<String> logins = Arrays.asList(
+            "1",
+            "priva@sfedu.ru",
+            "smakarov@sfedu.ru",
+            "mgavrilova@sfedu.ru",
+            "mfomin@sfedu.ru"
+    );
+
+    List<String> passwords = Arrays.asList(
+            "1",
+            "priva123",
+            "makarov456",
+            "gavrilova789",
+            "fomin123"
+    );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbHelper = new DBHelper(this, "mybd", null, 1);
-        //SQLiteDatabase dbWriter = dbHelper.getWritableDatabase();
-        SQLiteDatabase dbReader = dbHelper.getReadableDatabase();
+        RoomDB db = App.getInstance().getDatabase();
+        UsersDao usersDao = db.usersDao();
+        /*UsersEntity usersEntity = new UsersEntity();
 
-        /*List<String> logins = Arrays.asList(
-                "1",
-                "priva@sfedu.ru",
-                "smakarov@sfedu.ru",
-                "mgavrilova@sfedu.ru",
-                "mfomin@sfedu.ru"
-        );
-
-        List<String> passwords = Arrays.asList(
-                "1",
-                "priva123",
-                "makarov456",
-                "gavrilova789",
-                "fomin123"
-        );*/
-
-        /*for (int i = 0; i < 5; i++) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("login", logins.get(i));
-            contentValues.put("password", passwords.get(i));
-            dbWriter.insert("users", null, contentValues);
+        for (int i = 0; i < 5; i++) {
+            usersEntity.login = logins.get(i);
+            usersEntity.password = passwords.get(i);
+            usersDao.insert(usersEntity);
         }*/
 
-        Cursor cursor = dbReader.query(
-          "users",
-          usersArray,
-          null,
-          null,
-          null,
-          null,
-          null
-        );
-
-        cursor.moveToFirst();
-
-        int loginIndex = cursor.getColumnIndex("login");
-        int passwordIndex = cursor.getColumnIndex("password");
-
-        do{
-            String login = cursor.getString(loginIndex);
-            String password = cursor.getString(passwordIndex);
-
-            emailsArray.add(login);
-            passwordsArray.add(password);
-        }while (cursor.moveToNext());
+        emailsArray = usersDao.getLogins();
+        passwordsArray = usersDao.getPasswords();
 
         email = findViewById(R.id.Email);
         password = findViewById(R.id.Password);

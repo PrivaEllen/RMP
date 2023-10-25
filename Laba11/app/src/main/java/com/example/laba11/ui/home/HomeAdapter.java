@@ -13,14 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.laba11.JSONStructure;
 import com.example.laba11.R;
+import com.example.laba11.Room.AllReceipts.AllReceiptsEntity;
 
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     private List<String> hdataSet;
-    static List<JSONStructure> hdata;
+    static List<AllReceiptsEntity> hdata;
 
-    public HomeAdapter(List<String> hdataSet, List<JSONStructure> hdata) {
+    public HomeAdapter(List<String> hdataSet, List<AllReceiptsEntity> hdata) {
         this.hdataSet = hdataSet;
         this.hdata = hdata;
     }
@@ -55,19 +56,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
                     String currentText = textView.getText().toString();
 
-                    JSONStructure currentReceipt = new JSONStructure();
+                    AllReceiptsEntity currentReceipt = new AllReceiptsEntity();
                     for (int i = 0; i < hdata.size(); i++) {
-                        if (hdata.get(i).Name == currentText) {
+                        if (hdata.get(i).name.compareTo(currentText) == 0) {
                             currentReceipt = hdata.get(i);
                         }
                     }
 
                     Bundle bundle = new Bundle();
                     bundle.putString("name", currentText);
-                    bundle.putInt("calorie", currentReceipt.Calorie);
-                    bundle.putInt("time", currentReceipt.Time);
-                    bundle.putInt("difficulty", currentReceipt.Difficulty);
-                    bundle.putString("ingredients", currentReceipt.Ingredients);
+                    bundle.putInt("calorie", currentReceipt.calorie);
+                    bundle.putInt("time", currentReceipt.time);
+                    bundle.putInt("difficulty", currentReceipt.difficulty);
+                    bundle.putString("ingredients", currentReceipt.ingredients);
 
                     Navigation.findNavController(v).navigate(R.id.navigation_dashboard, bundle);
                 }

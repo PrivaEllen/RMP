@@ -18,6 +18,11 @@ import com.example.laba11.DBHelper;
 import com.example.laba11.JSONStructure;
 import com.example.laba11.R;
 import com.example.laba11.RetrofitInterface;
+import com.example.laba11.Room.AllReceipts.AllReceiptsDao;
+import com.example.laba11.Room.AllReceipts.AllReceiptsEntity;
+import com.example.laba11.Room.App;
+import com.example.laba11.Room.RoomDB;
+import com.example.laba11.Room.Users.UsersDao;
 import com.example.laba11.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -39,7 +44,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter hAdapter;
 
     private List<String> recyclerDataNames = new ArrayList<>();
-    private List<JSONStructure> recyclerData = new ArrayList<>();
+    private List<AllReceiptsEntity> recyclerData = new ArrayList<>();
 
     DBHelper dbHelper;
 
@@ -55,13 +60,6 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         recyclerView = binding.allReceipts;
-
-        dbHelper = new DBHelper(this.getContext(), "mybd", null, 1);
-        //SQLiteDatabase dbWriter = dbHelper.getWritableDatabase();
-        SQLiteDatabase dbReader = dbHelper.getReadableDatabase();
-
-        //String[] hStrings = getResources().getStringArray(R.array.receipts_data);
-        //List<String> receiptsData = Arrays.asList(hStrings);
 
         hAdapter = new HomeAdapter(recyclerDataNames, recyclerData);
 
@@ -81,61 +79,24 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<JSONStructure>> call, Response<List<JSONStructure>> response) {
                 Log.i("Response", Arrays.toString(response.body().toArray()));
 
-                //List<JSONStructure> receiptsItems = new JSONStructure().getReceipts(response.body());
-                //List<String> receiptsNamesItems = new JSONStructure().getNamesReceipts(response.body());
+                RoomDB db = App.getInstance().getDatabase();
+                AllReceiptsDao allReceiptsDao = db.allReceiptsDao();
+                /*AllReceiptsEntity allReceiptsEntity = new AllReceiptsEntity();
 
-                /*for (int i = 0; i < receiptsItems.size(); i++) {
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("name", receiptsItems.get(i).Name);
-                    contentValues.put("calorie", receiptsItems.get((i)).Calorie);
-                    contentValues.put("time", receiptsItems.get((i)).Time);
-                    contentValues.put("ingredients", receiptsItems.get((i)).Ingredients);
-                    contentValues.put("difficulty", receiptsItems.get((i)).Difficulty);
-                    dbWriter.insert("allReceipts", null, contentValues);
+                for (int i = 0; i < response.body().size(); i++) {
+                    allReceiptsEntity.name = response.body().get(i).Name;
+                    allReceiptsEntity.calorie = response.body().get(i).Calorie;
+                    allReceiptsEntity.time = response.body().get(i).Time;
+                    allReceiptsEntity.ingredients = response.body().get(i).Ingredients;
+                    allReceiptsEntity.difficulty = response.body().get(i).Difficulty;
+                    allReceiptsDao.insert(allReceiptsEntity);
                 }*/
-
-                Cursor cursor = dbReader.query(
-                        "allReceipts",
-                        allReceiptsArray,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null
-                );
-
-                cursor.moveToFirst();
-
-                int nameIndex = cursor.getColumnIndex("name");
-                int calorieIndex = cursor.getColumnIndex("calorie");
-                int timeIndex = cursor.getColumnIndex("time");
-                int ingredientsIndex = cursor.getColumnIndex("ingredients");
-                int difficultyIndex = cursor.getColumnIndex("difficulty");
-
-                do{
-                    String name = cursor.getString(nameIndex);
-                    int calorie = cursor.getInt(calorieIndex);
-                    int time = cursor.getInt(timeIndex);
-                    String ingredients = cursor.getString(ingredientsIndex);
-                    int difficulty = cursor.getInt(difficultyIndex);
-
-                    JSONStructure jsonStructure = new JSONStructure();
-                    jsonStructure.Name = name;
-                    jsonStructure.Calorie = calorie;
-                    jsonStructure.Time = time;
-                    jsonStructure.Ingredients = ingredients;
-                    jsonStructure.Difficulty = difficulty;
-
-                    namesReceiptsArray.add(name);
-                    receiptsArray.add(jsonStructure);
-                }while (cursor.moveToNext());
-
 
                 recyclerDataNames.clear();
                 recyclerData.clear();
 
-                recyclerDataNames.addAll(namesReceiptsArray);
-                recyclerData.addAll(receiptsArray);
+                recyclerDataNames.addAll(allReceiptsDao.getNames());
+                recyclerData.addAll(allReceiptsDao.getAll());
 
                 hAdapter.notifyDataSetChanged();
 

@@ -49,7 +49,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "id integer primary key autoincrement,"
                 + "userId integer,"
                 + "favoriteReceiptId integer,"
-                + "difficulty integer,"
                 + "FOREIGN KEY (userId) REFERENCES favoriteReceipts(id),"
                 + "FOREIGN KEY (favoritereceiptId) REFERENCES users(id)"  + ")");
 
