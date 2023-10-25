@@ -8,21 +8,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.laba11.JSONStructure;
 import com.example.laba11.R;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     private List<String> hdataSet;
-    static List<JSONStructure> hdata;
 
-    public HomeAdapter(List<String> hdataSet, List<JSONStructure> hdata) {
+    public HomeAdapter(List<String> hdataSet) {
         this.hdataSet = hdataSet;
-        this.hdata = hdata;
     }
 
     @NonNull
@@ -51,25 +52,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TextView textView = (TextView) v.findViewById(R.id.text_receipt);
-
-                    String currentText = textView.getText().toString();
-
-                    JSONStructure currentReceipt = new JSONStructure();
-                    for (int i = 0; i < hdata.size(); i++) {
-                        if (hdata.get(i).Name == currentText) {
-                            currentReceipt = hdata.get(i);
-                        }
-                    }
-
-                    Bundle bundle = new Bundle();
-                    bundle.putString("name", currentText);
-                    bundle.putInt("calorie", currentReceipt.Calorie);
-                    bundle.putInt("time", currentReceipt.Time);
-                    bundle.putInt("difficulty", currentReceipt.Difficulty);
-                    bundle.putString("ingredients", currentReceipt.Ingredients);
-
-                    Navigation.findNavController(v).navigate(R.id.navigation_dashboard, bundle);
+                    Navigation.findNavController(v).navigate(R.id.navigation_dashboard);
                 }
             });
         }
