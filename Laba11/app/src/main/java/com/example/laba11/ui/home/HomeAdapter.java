@@ -57,8 +57,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
                     JSONStructure currentReceipt = new JSONStructure();
                     for (int i = 0; i < hdata.size(); i++) {
-                        if (hdata.get(i).Name == currentText) {
+                        if (hdata.get(i).Name.equals(currentText)) {
                             currentReceipt = hdata.get(i);
+                            break;
                         }
                     }
 
