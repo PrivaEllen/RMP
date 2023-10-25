@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Laba11</string>
+    <string-array name="emails">
+        <item>1</item>
+        <item>priva@sfedu.ru</item>
+        <item>smakarov@sfedu.ru</item>
+        <item>mgavrilova@sfedu.ru</item>
+        <item>mfomin@sfedu.ru</item>
+        <item>aplyasovskih@sfedu.ru</item>
+    </string-array>
+    <string-array name="passwords">
+        <item>1</item>
+        <item>priva123</item>
+        <item>makarov456</item>
+        <item>gavrilova789</item>
+        <item>fomin123</item>
+        <item>plyasovskih456</item>
+    </string-array>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_home">All receipts</string>
+    <string name="title_dashboard">Chosen receipt</string>
+    <string name="title_notifications">Favorit</string>
+    <string-array name="receipts_data">
+        <item>Cake</item>
+        <item>Pudding</item>
+        <item>Pies</item>
+        <item>Pasta</item>
+        <item>Paella</item>
+
+        <item>Quiche</item>
+        <item>Turkey</item>
+        <item>Crispy duck</item>
+        <item>Chicken</item>
+        <item>Meat in french</item>
+
+        <item>Chocolate</item>
+        <item>Candies</item>
+        <item>Mash</item>
+        <item>Fried rice</item>
+        <item>Pilaf</item>
+
+        <item>Free potato</item>
+        <item>Burgers</item>
+        <item>Pizza</item>
+        <item>Sushi</item>
+        <item>Mussels</item>
+
+        <item>Salted salmon</item>
+        <item>Shrimps</item>
+        <item>Langoustines</item>
+        <item>Crab</item>
+        <item>Caviar</item>
+    </string-array>
+</resources>
