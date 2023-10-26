@@ -45,9 +45,6 @@ public class HomeFragment extends Fragment {
 
         recyclerView = binding.allReceipts;
 
-        String[] hStrings = getResources().getStringArray(R.array.receipts_data);
-
-        List<String> receiptsData = Arrays.asList(hStrings);
         hAdapter = new HomeAdapter(recyclerDataNames, recyclerData);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
