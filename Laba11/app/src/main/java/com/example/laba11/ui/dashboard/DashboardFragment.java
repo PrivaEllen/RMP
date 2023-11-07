@@ -26,29 +26,30 @@ public class DashboardFragment extends Fragment {
         DashboardViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
-        Log.i("Arg:", getArguments().toString());
-
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        TextView name = (TextView) root.findViewById(R.id.text_dashboard);
-        name.setText(getArguments().getString("name"));
+        if (getArguments() != null) {
+            TextView name = (TextView) root.findViewById(R.id.text_dashboard);
+            name.setText(getArguments().getString("name"));
 
-        TextView calories = (TextView) root.findViewById(R.id.text_calorie);
-        String formattedCalorie = String.format("Калорийность: %d", getArguments().getInt("calorie"));
-        calories.setText(formattedCalorie);
+            TextView calories = (TextView) root.findViewById(R.id.text_calorie);
+            String formattedCalorie = String.format("Калорийность: %d", getArguments().getInt("calorie"));
+            calories.setText(formattedCalorie);
 
-        TextView time = (TextView) root.findViewById(R.id.text_time);
-        String formattedTime = String.format("Время: %d", getArguments().getInt("time"));
-        time.setText(formattedTime);
+            TextView time = (TextView) root.findViewById(R.id.text_time);
+            String formattedTime = String.format("Время: %d", getArguments().getInt("time"));
+            time.setText(formattedTime);
 
-        TextView ingredients = (TextView) root.findViewById(R.id.text_ingredients);
-        String formattedIngredients = String.format("Ингредиенты: %s", getArguments().getString("ingredients"));
-        ingredients.setText(formattedIngredients);
+            TextView ingredients = (TextView) root.findViewById(R.id.text_ingredients);
+            String formattedIngredients = String.format("Ингредиенты: %s", getArguments().getString("ingredients"));
+            ingredients.setText(formattedIngredients);
 
-        TextView difficulty = (TextView) root.findViewById(R.id.text_difficulty);
-        String formattedDifficulty = String.format("Уровень сложности: %d", getArguments().getInt("difficulty"));
-        difficulty.setText(formattedDifficulty);
+            TextView difficulty = (TextView) root.findViewById(R.id.text_difficulty);
+            String formattedDifficulty = String.format("Уровень сложности: %d", getArguments().getInt("difficulty"));
+            difficulty.setText(formattedDifficulty);
+
+        }
 
         return root;
     }
