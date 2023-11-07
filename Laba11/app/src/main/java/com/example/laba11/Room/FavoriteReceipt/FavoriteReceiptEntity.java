@@ -1,5 +1,6 @@
 package com.example.laba11.Room.FavoriteReceipt;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -17,4 +18,10 @@ public class FavoriteReceiptEntity {
     public String ingredients;
 
     public int difficulty;
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.format("Calorie: %d\nTime: %d\nName: %s\nIngredients: %s\nDifficulty: %d\n\n", calorie, time, name, ingredients, difficulty);
+    }
 }

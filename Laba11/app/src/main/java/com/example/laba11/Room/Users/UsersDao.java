@@ -18,6 +18,9 @@ public interface UsersDao {
     @Query("SELECT password FROM RUsers")
     List<String> getPasswords();
 
+    @Query("SELECT id FROM Rusers WHERE login = :email")
+    int getId(String email);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(UsersEntity RUsers);
 }

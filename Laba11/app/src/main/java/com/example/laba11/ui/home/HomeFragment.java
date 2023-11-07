@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
 
         recyclerView = binding.allReceipts;
 
-        hAdapter = new HomeAdapter(recyclerDataNames, recyclerData);
+        hAdapter = new HomeAdapter(recyclerDataNames, recyclerData, getContext());
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setAdapter(hAdapter);
@@ -81,16 +82,6 @@ public class HomeFragment extends Fragment {
 
                 RoomDB db = App.getInstance().getDatabase();
                 AllReceiptsDao allReceiptsDao = db.allReceiptsDao();
-                /*AllReceiptsEntity allReceiptsEntity = new AllReceiptsEntity();
-
-                for (int i = 0; i < response.body().size(); i++) {
-                    allReceiptsEntity.name = response.body().get(i).Name;
-                    allReceiptsEntity.calorie = response.body().get(i).Calorie;
-                    allReceiptsEntity.time = response.body().get(i).Time;
-                    allReceiptsEntity.ingredients = response.body().get(i).Ingredients;
-                    allReceiptsEntity.difficulty = response.body().get(i).Difficulty;
-                    allReceiptsDao.insert(allReceiptsEntity);
-                }*/
 
                 recyclerDataNames.clear();
                 recyclerData.clear();

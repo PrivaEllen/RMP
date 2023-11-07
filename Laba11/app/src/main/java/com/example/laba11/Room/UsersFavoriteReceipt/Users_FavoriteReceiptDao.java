@@ -14,6 +14,12 @@ public interface Users_FavoriteReceiptDao {
     @Query("SELECT * FROM RUsers_RFavoriteReceipt")
     List<Users_FavoriteReceiptEntity> getAll();
 
+    @Query("SELECT id FROM RUsers_RFavoriteReceipt WHERE favoriteReceiptId=:receiptId")
+    int getId(int receiptId);
+
+    @Query("SELECT favoriteReceiptId FROM RUsers_RFavoriteReceipt WHERE userId=:user_id")
+    List<Integer> getReceiptsId(int user_id);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Users_FavoriteReceiptEntity RUsers_RFavoriteReceipt);
 }

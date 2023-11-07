@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     List<String> emailsArray = new ArrayList<>();
     List<String> passwordsArray = new ArrayList<>();
 
+    public static int currentId;
+
     List<String> logins = Arrays.asList(
             "1",
             "priva@sfedu.ru",
@@ -57,13 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         RoomDB db = App.getInstance().getDatabase();
         UsersDao usersDao = db.usersDao();
-        /*UsersEntity usersEntity = new UsersEntity();
-
-        for (int i = 0; i < 5; i++) {
-            usersEntity.login = logins.get(i);
-            usersEntity.password = passwords.get(i);
-            usersDao.insert(usersEntity);
-        }*/
 
         emailsArray = usersDao.getLogins();
         passwordsArray = usersDao.getPasswords();
@@ -101,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         if (emailsArray.contains(email.getText().toString()) &&
                 passwordsArray.contains(password.getText().toString())) {
             Intent intent = new Intent(this, BottomNavActivity.class);
+
+            RoomDB db = App.getInstance().getDatabase();
+            UsersDao usersDao = db.usersDao();
+            currentId = usersDao.getId(email.getText().toString());
+
             startActivity(intent);
         }
         else {

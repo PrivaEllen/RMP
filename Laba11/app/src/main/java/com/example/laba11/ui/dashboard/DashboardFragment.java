@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.laba11.R;
 import com.example.laba11.databinding.FragmentDashboardBinding;
@@ -54,6 +55,7 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+//        Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_bottom_nav).popBackStack();
         super.onDestroyView();
         binding = null;
     }

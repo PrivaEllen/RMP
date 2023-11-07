@@ -1,10 +1,12 @@
 package com.example.laba11;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -13,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.laba11.databinding.ActivityBottomNavBinding;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class BottomNavActivity extends AppCompatActivity {
     private ActivityBottomNavBinding binding;
